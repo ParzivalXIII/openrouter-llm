@@ -18,14 +18,15 @@ A production-grade, modular FastAPI service that routes LLM requests through the
 ## Quick Start
 
 ### Prerequisites
+
 - Python 3.12+
-- An active OpenRouter account with API key (https://openrouter.ai)
+- An active OpenRouter account with API key (<https://openrouter.ai>)
 - `uv` package manager
 
 ### 1. Clone & Setup Environment
 
 ```bash
-git clone <repo>
+git clone https://github.com/ParzivalXIII/openrouter-llm.git
 cd openrouter-api
 
 # Copy environment template
@@ -95,6 +96,7 @@ chmod +x test_endpoints.sh
 **Health check endpoint.**
 
 **Response:**
+
 ```json
 {
   "status": "healthy",
@@ -108,6 +110,7 @@ chmod +x test_endpoints.sh
 **Single-turn chat completion** (non-streaming).
 
 **Request:**
+
 ```json
 {
   "messages": [
@@ -121,6 +124,7 @@ chmod +x test_endpoints.sh
 ```
 
 **Fields:**
+
 - `messages` *(required)*: Array of message objects with `role` and `content`.
   - `role`: One of `"system"`, `"user"`, or `"assistant"`.
   - `content`: The message text.
@@ -129,6 +133,7 @@ chmod +x test_endpoints.sh
 - `max_tokens` *(optional)*: Maximum tokens to generate. Default: None (model limit).
 
 **Response:**
+
 ```json
 {
   "content": "The capital of France is Paris.",
@@ -149,6 +154,7 @@ chmod +x test_endpoints.sh
 **Request:** Same as `/v1/chat`.
 
 **Response** (SSE format):
+
 ```
 data: {"content": "The", "model": "anthropic/claude-sonnet-4.5"}
 
@@ -270,6 +276,7 @@ docker run -p 8000:8000 \
 The service returns structured JSON errors:
 
 **Example (Missing API Key):**
+
 ```json
 {
   "error": {
@@ -281,6 +288,7 @@ The service returns structured JSON errors:
 ```
 
 **HTTP Status Codes:**
+
 - `200 OK` — Successful request
 - `400 Bad Request` — Invalid input (validation failed)
 - `422 Unprocessable Entity` — Request validation error
@@ -383,13 +391,15 @@ spec:
 ### Rate Limit (429) Errors
 
 OpenRouter enforces rate limits. The service retries with exponential backoff. If you continue to get 429s:
-- Check your account's usage limits at https://openrouter.ai/settings
+
+- Check your account's usage limits at <https://openrouter.ai/settings>
 - Consider using a different model with higher quota
 - Implement request queuing for high-traffic scenarios
 
 ### Connection Timeout
 
 If requests hang:
+
 1. Verify `OPENROUTER_API_KEY` is valid (and not expired)
 2. Check network connectivity to `openrouter.ai`
 3. Verify the `MODEL_ID` is supported by OpenRouter
@@ -398,6 +408,7 @@ If requests hang:
 ### Environment Variables Not Loaded
 
 If the app complains about missing `OPENROUTER_API_KEY`:
+
 1. Ensure `.env` exists in the project root
 2. Verify you've run `uv sync` to install `python-dotenv`
 3. When using Docker, verify `.env` is deployed or passed via `-e` flags
@@ -424,17 +435,18 @@ Contributions are welcome! Please:
 
 ## References
 
-- **OpenRouter Docs**: https://openrouter.ai/docs
-- **LangChain**: https://python.langchain.com
-- **FastAPI**: https://fastapi.tiangolo.com
-- **Pydantic**: https://docs.pydantic.dev
-- **Tenacity**: https://tenacity.readthedocs.io
+- **OpenRouter Docs**: <https://openrouter.ai/docs>
+- **LangChain**: <https://python.langchain.com>
+- **FastAPI**: <https://fastapi.tiangolo.com>
+- **Pydantic**: <https://docs.pydantic.dev>
+- **Tenacity**: <https://tenacity.readthedocs.io>
 
 ---
 
 ## Support
 
 For issues or questions:
+
 1. Check existing GitHub issues
 2. Review the troubleshooting section above
 3. Create a detailed GitHub issue with:
